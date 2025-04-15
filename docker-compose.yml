@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx-local:
-    image: nginx:alpine
+    image: nginx:1.27.4-alpine
     container_name: hginx-local
     ports:
       - "127.0.0.1:8080:80"
@@ -13,7 +13,7 @@ services:
       - internal
 
   nginx-proxy:
-    image: nginx:alpine
+    image: nginx:1.27.4-alpine
     container_name: nginx-proxy
     ports:
       - "80:80"
