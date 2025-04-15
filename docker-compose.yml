@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  nginx-local:
+    image: nginx:alpine
+    container_name: hginx-local
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/html:/usr/share/nginx/html
+    networks:
+      - internal
+
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - nginx-local
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
